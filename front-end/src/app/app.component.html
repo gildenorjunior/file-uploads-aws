@@ -1,0 +1,30 @@
+<div class="flex justify-center items-center gap-6">
+  <img src="./../assets/aws_logo.png" width="60px" alt="aws logo">
+  <h1 class="">Upload de arquivos</h1>
+</div>
+
+<div class="flex justify-center">
+  <p-toast></p-toast>
+  <p-fileUpload 
+    name="teste" 
+    accept="image/*, .pdf, .doc, .xls, .csv, .txt"
+    [multiple]="false"
+    [customUpload]="true"
+    (uploadHandler)="onUpload($event)"
+    (onSelect)="aoSelecionar($event)"
+    (onClear)="aoLimpar()"
+    (onRemove)="aoLimpar()">
+    teste
+    <ng-template pTemplate="content">
+      @if (selectedFiles.length || uploadedFiles.length) {
+        <ul>
+          @for (file of uploadedFiles; track $index) {
+            <li>{{ file.name }} - {{ file.size }} bytes</li>
+          }
+        </ul>
+      } @else {
+        <p class="flex justify-center">Lista vazia</p>
+      }
+    </ng-template>
+  </p-fileUpload>
+</div>
